@@ -17,7 +17,7 @@ if ($_POST) {
     $id = $query->fetch(PDO::FETCH_ASSOC);
 
     if ($id) {
-        $_SESSION['id'] = $id['id'];
+        $_SESSION['alumno'] = $id;
         header("location:inicio.php");
     } else {
         echo "no crack, no puedes pasar, no tienes acceso";
