@@ -1,9 +1,25 @@
 <?php
-include("config.php");
-$servidor = "mysql:dbname=" . BD . ";host=" . SERVIDOR;
+class Conexion
+{
+    private $SERVIDOR = "localhost";
+    private $USUARIO = "root";
+    private $PASSWORD = "";
+    private $DB = "escuela";
+    private $conectar;
 
-try {
-    $pdo = new PDO($servidor, USUARIO, PASSWORD, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-} catch (PDOException $e) {
-    echo "<script> alert('Error de conexión carnal intenta más tarde....plix, okei? ok')</script>";
+    public function __construct()
+    {
+        $conexionServidor = "mysql:host=" . $this->SERVIDOR . ";dbname=" . $this->DB . ";charset=utf8";
+        try {
+            $this->conectar = new PDO($conexionServidor, $this->USUARIO, $this->PASSWORD);
+            $this->conectar->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            $this->conectar = "Error en la conexion a la base de datos";
+            echo "ERROR: " . $e->getMessage();
+        }
+    }
+    public function Conectar()
+    {
+        return $this->conectar;
+    }
 }

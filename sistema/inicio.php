@@ -1,9 +1,23 @@
 <?php
 session_start();
+include_once 'configuracion/conexion.php';
 $alumnos = $_SESSION['alumno'];
 
 if (!isset($_SESSION['alumno'])) {
     header("Location: login.php");
+}
+
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$query = $pdo->prepare("SELECT c.id,c.id_Ciclo,c.Calificacion,m.Nom_Materia,s.Semestre,a.Nombre,ci.Nom_Ciclo FROM `calificaciones` c
+    INNER JOIN materias m on c.id_Materia=m.id
+    INNER JOIN alumnos a on c.id_Alumno=a.id
+    INNER JOIN ciclo ci on c.id_Ciclo=ci.id
+    INNER JOIN semestres s on m.id_Semestre=s.id
+    where c.id_Alumno=29;");
+
+$calificaciones = $query->fetch(PDO::FETCH_ASSOC);
+while ($row = $calificaciones->fetch_assoc()) {
+    echo $row[''];
 }
 
 ?>
@@ -47,7 +61,7 @@ if (!isset($_SESSION['alumno'])) {
                 <div class="d-flex flex-column justify-content-center align-items-center p-4 border border-success" style="border-radius: 1.5rem;">
 
                     <img src="../public/img/usuario.png" class="rounded-circle" width="100" height="100">
-                    <h5 class="text-success mt-3"> <?php echo $alumnos['Nombre'] . " " . $alumnos['Apellido_P'] . " " . $alumnos['Apellido_M'] ?></h5>
+                    <h5 class="text-success mt-3"> <?php echo $alumnos['Nombre'] . " " . $alumnos['Apellido_P'] . " " . $alumnos['Apellido_M']  ?></h5>
                     <br>
                     <p class="text-success mt-2">Promedio General 8.2</p>
                     <br>
