@@ -38,7 +38,7 @@
             <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                 <div class="card shadow-2-strong" style="border-radius: 1.5rem;">
                     <div class="card-body p-5 text-center">
-                        <form action="mecanismo.php" method="post">
+                        <form action="login/mecanismo.php" method="post">
 
                             <img src="../public/img/logoUNM.png" alt="logo" width="70">
                             <h3 class="md-6 fs-5 fw-semibold">UNIVERSIDAD NACIONALISTA MÉXICO</h3>
