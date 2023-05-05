@@ -1,13 +1,13 @@
-<?php 
+<?php
 session_start();
-include "../clases/Autenticacion.php";
+include "../clases/Alumno.php";
 
 $matricula = $_POST['matricula'];
 $contraseña = $_POST['contraseña'];
 
-$Auth = new Autenticacion();
+$Auth = new Alumnos();
 
-if ($Auth->logeo($matricula,$contraseña)) {
+if ($Auth->Login($matricula, $contraseña)) {
     header("location:../inicio.php");
 } else {
     echo "error";
