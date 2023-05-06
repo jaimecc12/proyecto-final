@@ -17,13 +17,13 @@
 
     <nav class="navbar navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="../index.html">
                 <img src="../public/img/UNM-LOGO.png" alt="logo de UNM" height="60">
             </a>
 
             <ul class="nav justify-content-end">
                 <li class="nav-item">
-                    <a class="nav-link active text-success" aria-current="page" href="#">inicio</a>
+                    <a class="nav-link active text-success" aria-current="page" href="../index.html">inicio</a>
                 </li>
 
 
