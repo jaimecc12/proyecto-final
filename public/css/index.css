@@ -29,3 +29,7 @@ header .overlay {
 .just_p {
     text-align: justify;
 }
+
+.selected {
+    border: 2px solid #036F03;
+}
