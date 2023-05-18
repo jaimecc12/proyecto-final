@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 if (!isset($_SESSION['id'])) {
     header("location:../index.html");
@@ -6,9 +7,6 @@ if (!isset($_SESSION['id'])) {
     $alumno = $_SESSION['id'];
     $calificaciones = $_SESSION['Calificaciones'];
     $semestres = $_SESSION['Semestre'];
-    $html = "";
-    $promedio = 0;
-    $Nun_materias = 0;
 }
 
 ?>
@@ -30,17 +28,19 @@ if (!isset($_SESSION['id'])) {
 <body>
 
     <div>
-        <h3 class="text-success mt-3">Nombre del Alumno <?php echo $alumno['Nombre'] . " " . $alumno['Apellido_P'] . " " . $alumno['Apellido_M'] ?></h3>
+        <img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/proyecto-final/public/img/logoUNM.png" alt="" width="60">
+        <h3 class="text-success mt-3">Nombre del Alumno: <?php echo $alumno['Nombre'] . " " . $alumno['Apellido_P'] . " " . $alumno['Apellido_M'] ?></h3>
         <p class="text-success mt-2">Promedio General <?php echo round($alumno['promedio']) ?></p>
     </div>
 
     <div>
-        <table class="table table-striped">
-            <thead>
+        <table class="table table-bordered">
+            <thead class=" bg-success ">
                 <tr>
                     <th scope="col">Semestre</th>
                     <th scope="col">Materia</th>
                     <th scope="col">Calificación</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -54,12 +54,15 @@ if (!isset($_SESSION['id'])) {
                                 <td> <?php echo $semestres[$i]['Semestre']  ?></td>
                                 <td> <?php echo $calificaciones[$j]['Nom_Materia'] ?> </td>
                                 <td> <?php echo $calificaciones[$j]['Calificacion'] ?></td>
+
                 </tr>
+
     <?php }
                         }
                     } ?>
 
             </tbody>
+
         </table>
     </div>
 
@@ -74,3 +77,28 @@ if (!isset($_SESSION['id'])) {
 </body>
 
 </html>
+<?php
+$html = ob_get_clean();
+
+require_once("libreria/dompdf/autoload.inc.php");
+
+// reference the Dompdf namespace
+use Dompdf\Dompdf;
+
+// instantiate and use the dompdf class
+$dompdf = new Dompdf();
+$options = $dompdf->getOptions();
+$options->set(array('isRemoteEnabled' => true));
+$dompdf->setOptions($options);
+
+$dompdf->loadHtml($html);
+
+// (Optional) Setup the paper size and orientation
+$dompdf->setPaper('letter');
+
+// Render the HTML as PDF
+$dompdf->render();
+
+// Output the generated PDF to Browser
+$dompdf->stream("Calificaciones_.pdf", array("Attachment" => false));
+?>

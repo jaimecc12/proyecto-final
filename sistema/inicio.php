@@ -60,7 +60,7 @@ if (!isset($_SESSION['id'])) {
                     <br>
                     <p class="text-success mt-2">Semestre Actual 8</p>
                     <br>
-                    <button class="btn btn-success" type="submit">Todas las Calificaciones</button>
+                    <a class="btn btn-success" href="plantillaCalificacion.php">Descargar Calificaciones</a>
 
 
                 </div>
