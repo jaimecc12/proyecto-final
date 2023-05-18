@@ -21,7 +21,23 @@ if (!isset($_SESSION['id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS v5.0.2 -->
-    <link rel="stylesheet" href="../public/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://localhost/tu-proyecto/public/bootstrap/css/bootstrap.min.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 
 </head>
 
@@ -29,17 +45,19 @@ if (!isset($_SESSION['id'])) {
 
     <div>
         <img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/proyecto-final/public/img/logoUNM.png" alt="" width="60">
-        <h3 class="text-success mt-3">Nombre del Alumno: <?php echo $alumno['Nombre'] . " " . $alumno['Apellido_P'] . " " . $alumno['Apellido_M'] ?></h3>
+        <!-- <h3 class="text-success mt-3">Nombre del Alumno:  <?php //echo $alumno['Nombre'] . " " . $alumno['Apellido_P'] . " " . $alumno['Apellido_M'] 
+                                                                ?> </h3> -->
+        <h3 class="" style="color: #036F03;">Nombre del Alumno: <?php echo $alumno['Nombre'] . " " . $alumno['Apellido_P'] . " " . $alumno['Apellido_M'] ?> </h3>
         <p class="text-success mt-2">Promedio General <?php echo round($alumno['promedio']) ?></p>
     </div>
 
     <div>
-        <table class="table table-bordered">
-            <thead class=" bg-success ">
+        <table>
+            <thead>
                 <tr>
-                    <th scope="col">Semestre</th>
-                    <th scope="col">Materia</th>
-                    <th scope="col">Calificación</th>
+                    <th>Semestre</th>
+                    <th>Materia</th>
+                    <th>Calificación</th>
 
                 </tr>
             </thead>
@@ -53,7 +71,7 @@ if (!isset($_SESSION['id'])) {
 
                                 <td> <?php echo $semestres[$i]['Semestre']  ?></td>
                                 <td> <?php echo $calificaciones[$j]['Nom_Materia'] ?> </td>
-                                <td> <?php echo $calificaciones[$j]['Calificacion'] ?></td>
+                                <td> <?php echo $calificaciones[$j]['Calificacion'] ?> </td>
 
                 </tr>
 
@@ -71,7 +89,7 @@ if (!isset($_SESSION['id'])) {
 
 
     <!-- Bootstrap JavaScript Libraries -->
-    <script src=" ../public/bootstrap/js/bootstrap.min.js">
+    <script src="/proyecto-final/public/bootstrap/js/bootstrap.min.js">
     </script>
 
 </body>
