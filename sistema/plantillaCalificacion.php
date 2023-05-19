@@ -10,91 +10,76 @@ if (!isset($_SESSION['id'])) {
 }
 
 ?>
-<!doctype html>
-<html lang="es">
+<!DOCTYPE html>
+<html>
 
 <head>
-    <title>Calificaciones</title>
-
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS v5.0.2 -->
-    <link rel="stylesheet" href="http://localhost/tu-proyecto/public/bootstrap/css/bootstrap.min.css">
     <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
+        h2,
+        p {
+            color: #036F03;
         }
 
-        th,
-        td {
-            border: 1px solid black;
+        table {
+            font-family: arial, sans-serif;
+            font-size: 12px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
             padding: 8px;
         }
 
-        th {
-            background-color: #f2f2f2;
+        tr:nth-child(even) {
+            background-color: #dddddd;
         }
     </style>
-
 </head>
 
 <body>
-
-    <div>
-        <img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/proyecto-final/public/img/logoUNM.png" alt="" width="60">
-        <!-- <h3 class="text-success mt-3">Nombre del Alumno:  <?php //echo $alumno['Nombre'] . " " . $alumno['Apellido_P'] . " " . $alumno['Apellido_M'] 
-                                                                ?> </h3> -->
-        <h3 class="" style="color: #036F03;">Nombre del Alumno: <?php echo $alumno['Nombre'] . " " . $alumno['Apellido_P'] . " " . $alumno['Apellido_M'] ?> </h3>
-        <p class="text-success mt-2">Promedio General <?php echo round($alumno['promedio']) ?></p>
-    </div>
-
-    <div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Semestre</th>
-                    <th>Materia</th>
-                    <th>Calificación</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <?php
-                    for ($i = 0; $i < count($semestres); $i++) {
-
-                        for ($j = 0; $j < count($calificaciones); $j++) {
-                            if ($semestres[$i]['Semestre'] == $calificaciones[$j]['Semestre']) { ?>
-
-                                <td> <?php echo $semestres[$i]['Semestre']  ?></td>
-                                <td> <?php echo $calificaciones[$j]['Nom_Materia'] ?> </td>
-                                <td> <?php echo $calificaciones[$j]['Calificacion'] ?> </td>
-
-                </tr>
-
-    <?php }
-                        }
-                    } ?>
-
-            </tbody>
-
-        </table>
-    </div>
+    <img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/proyecto-final/public/img/logoUNM.png" alt="" width="60">
+    <h2>Nombre del Alumno: <?php echo $alumno['Nombre'] . " " . $alumno['Apellido_P'] . " " . $alumno['Apellido_M'] ?></h2>
+    <p>Promedio General <?php echo round($alumno['promedio']) ?></p>
 
 
 
+    <table>
+        <thead>
+            <tr>
+                <th>Semestre</th>
+                <th>Materia</th>
+                <th>Calificación</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            for ($i = 0; $i < count($semestres); $i++) {
+
+                for ($j = 0; $j < count($calificaciones); $j++) {
+                    if ($semestres[$i]['Semestre'] == $calificaciones[$j]['Semestre']) { ?>
+                        <tr>
 
 
-    <!-- Bootstrap JavaScript Libraries -->
-    <script src="/proyecto-final/public/bootstrap/js/bootstrap.min.js">
-    </script>
+                            <td> <?php echo $semestres[$i]['Semestre']  ?></td>
+                            <td> <?php echo $calificaciones[$j]['Nom_Materia'] ?> </td>
+                            <td> <?php echo $calificaciones[$j]['Calificacion'] ?> </td>
+
+                        </tr>
+            <?php }
+                }
+            } ?>
+        </tbody>
+    </table>
+
 
 </body>
 
 </html>
+
 <?php
 $html = ob_get_clean();
 
@@ -118,5 +103,5 @@ $dompdf->setPaper('letter');
 $dompdf->render();
 
 // Output the generated PDF to Browser
-$dompdf->stream("Calificaciones_.pdf", array("Attachment" => false));
+$dompdf->stream("Calificaciones_.pdf", array("Attachment" => true));
 ?>
